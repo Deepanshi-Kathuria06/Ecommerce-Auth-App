@@ -1,4 +1,4 @@
-/* Navbar Styles - Proper Alignment */
+/* Navbar Styles - Matching Theme */
 :root {
     --primary-color: #6c63ff;
     --secondary-color: #ff6584;
@@ -18,10 +18,14 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .navbar-container {
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -36,7 +40,6 @@
     font-size: 1.5rem;
     color: var(--dark-color);
     transition: var(--transition);
-    margin-right: auto; /* Pushes everything else to the right */
   }
   
   .navbar-brand:hover {
@@ -57,7 +60,7 @@
   
   .navbar-menu {
     display: flex;
-    margin-left: auto; /* Ensures menu stays on the right */
+    align-items: center;
   }
   
   .navbar-list {
@@ -88,14 +91,16 @@
     color: var(--primary-color);
   }
   
-  .navbar-link span {
-    margin-left: 0.5rem;
+  .navbar-link.active {
+    color: var(--primary-color);
+    font-weight: 600;
   }
   
   .navbar-icon {
     width: 22px;
     height: 22px;
     fill: currentColor;
+    margin-right: 0.5rem;
   }
   
   .cart-icon-container {
@@ -119,8 +124,18 @@
     font-weight: 600;
   }
   
+  /* Mobile Menu Toggle (hidden by default) */
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    cursor: pointer;
+  }
+  
   /* Responsive Adjustments */
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     .navbar {
       padding: 1rem;
     }
@@ -130,25 +145,68 @@
     }
     
     .navbar-title {
-      display: inline; /* Keep title visible on medium screens */
+      display: none;
     }
   }
   
-  @media (max-width: 576px) {
-    .navbar-title {
-      display: none; /* Hide title on small screens */
+  @media (max-width: 768px) {
+    .navbar-menu {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      width: 100%;
+      background: white;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 0;
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(-150%);
+      transition: transform 0.3s ease;
     }
     
-    .navbar-link span {
-      display: none; /* Hide text labels on small screens */
+    .navbar-menu.active {
+      transform: translateY(0);
     }
     
     .navbar-list {
-      gap: 1.5rem; /* More space for icon-only navigation */
+      flex-direction: column;
+      width: 100%;
+      gap: 0;
+    }
+    
+    .navbar-item {
+      width: 100%;
+      justify-content: center;
+      padding: 1rem 0;
+    }
+    
+    .navbar-link {
+      justify-content: center;
+      padding: 0.5rem 1rem;
+    }
+    
+    .menu-toggle {
+      display: block;
+    }
+    
+    .navbar-container {
+      flex-wrap: wrap;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar-link span {
+      display: none;
     }
     
     .navbar-icon {
+      margin-right: 0;
       width: 24px;
-      height: 24px; /* Larger touch targets */
+      height: 24px;
+    }
+    
+    .cart-badge {
+      top: -6px;
+      right: -6px;
     }
   }
